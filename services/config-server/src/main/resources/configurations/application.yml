@@ -1,0 +1,13 @@
+euraka:
+  instance:
+    hostname: localhost
+  client:
+    defaultZone: http://localhost:8761/eureka/
+spring:
+  cloud:
+    config:
+      override-system-properties: false
+management:
+  tracing:
+    sampling:
+      probability: 1.0

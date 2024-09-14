@@ -1,0 +1,32 @@
+server:
+  port: 8222
+spring:
+  cloud:
+    gateway:
+#      // Enable the discovery of services (Connect to euereka server)
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: customer-service
+          #CUSTOMER-SERVICE is the name of the service in the Eureka server
+          uri: lb:http://CUSTOMER-SERVICE
+          predicates:
+#            - Headers=your_header
+            - Path=/api/v1/customers/**
+        - id: order-service
+          uri: lb:http://ORDER-SERVICE
+          predicates:
+            - Path=/api/v1/orders/**
+        - id: order-lines-service
+          uri: lb:http://ORDER-SERVICE
+          predicates:
+            - Path=/api/v1/order-lines/**
+        - id: product-service
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/products/**
+        - id: payment-service
+          uri: lb:http://PAYMENT-SERVICE
+          predicates:
+            - Path=/api/v1/payments/**
